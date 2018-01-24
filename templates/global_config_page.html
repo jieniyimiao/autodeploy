@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎使用自动部署平台网站 - Welcome to auto deploy website</title>
+    <meta name="keywords" content="自动部署,自动部署平台">
+    <meta name="description" content="该平台可实现组件和服务的一键部署和升级">
+
+
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery/smoothness/jquery-ui-1.10.3.custom.css">
+    <script type="text/javascript" src="/static/js/jquery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/static/js/jquery/jquery-ui-1.10.3.custom.js"></script>
+
+
+    <link rel="stylesheet" href="/static/css/template.css" type="text/css" />
+    <script type="text/javascript" src="/static/js/template.js"></script>
+
+    <link rel="stylesheet" href="/static/css/global_config_page.css" type="text/css" />
+    <script type="text/javascript" src="/static/js/global_config_page.js"></script>
+
+</head>
+<body>
+
+<!--=============header===============-->
+<div id="header">
+    <div id="header_logo">
+        <a href="../index">
+            <img src="/static/imgs/logo_white.png">
+        </a>
+    </div>
+    <div id="header_content">
+        <a href="../index" style="text-decoration: none; color:black">
+            <p1>自动化部署平台</p1>
+        </a>
+    </div>
+</div>
+<!--=============aside===============-->
+<div id="aside">
+    <ul id="aside_menu">
+        <li ><a href="get_global_config_page"><strong>全局配置</strong></a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">主机列表</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">部署配置</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">正在部署</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">部署结果</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">服务管理</a></li>
+    </ul>
+</div>
+<!--=============content===============-->
+<div id="content">
+    <div id="content_title">全局配置信息</div>
+
+    <div id="content_form">
+        <form method="post" action="/save_global_config/">
+            <div id="content_form_debug">
+                调试  :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label><input name="enable_debug" type="checkbox" value="enable_debug"
+                        {% if data.enable_debug %} checked="checked" {% endif %}/>开启调试 </label>
+            </div>
+            <div id="content_form_username">
+                部署机用户：&nbsp; <input name="username" type="text" size="22" value ={{ data.user }} >
+            </div>
+            <div id="content_form_password">
+                部署机密码：&nbsp; <input name="password" type="text" size="22" value ={{ data.pwd }} >
+            </div>
+            <div id="content_form_btn">
+                <input name="" type="submit" value="下一步"/>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+</body>
+</html>
+
+
+

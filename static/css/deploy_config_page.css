@@ -1,0 +1,149 @@
+/*组件配置面板*/
+#content {
+    font-family: "Microsoft YaHei";
+    width: 1030px;
+    float: left;
+}
+
+#content_component_deploy {
+    margin-top: 80px;
+}
+
+#content_component_deploy_text {
+    margin-left: 50px;
+    float: left;
+    width: 80px;
+    height: 100px;
+    border: 1px dashed black;
+}
+
+#content_component_deploy_text_content {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#content_component_deploy_panel {
+    margin-left: 50px;
+    float: left;
+    width: 750px;
+    height: 100px;
+    border: 1px dashed black;
+}
+
+#content_component_deploy_panel_name,
+#content_component_deploy_panel_mode,
+#content_component_deploy_panel_operation {
+    float: left;
+    text-align: center;
+    width: 250px;
+}
+
+#content_component_deploy_panel_name_title,
+#content_component_deploy_panel_mode_title,
+#content_component_deploy_panel_operation_title {
+    margin-top: 20px;
+}
+
+#content_component_deploy_panel_name_content,
+#content_component_deploy_panel_mode_content,
+#content_component_deploy_panel_operation_content {
+    margin-top: 10px;
+}
+
+#mysql_cluster_ip_config_dialog_vip {
+    font-size: 20px;
+}
+
+/*服务配置面板*/
+#content_service_deploy {
+    margin-top: 240px;
+}
+
+#content_service_deploy_text {
+    margin-left: 50px;
+    float: left;
+    width: 80px;
+    height: 100px;
+    border: 1px dashed black;
+}
+
+#content_service_deploy_text_content {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#content_service_deploy_panel {
+    margin-left: 50px;
+    float: left;
+    width: 750px;
+    height: 100px;
+    border: 1px dashed black;
+}
+
+#content_service_deploy_panel_name,
+#content_service_deploy_panel_mode,
+#content_service_deploy_panel_host,
+#content_service_deploy_panel_user,
+#content_service_deploy_panel_operation {
+    float: left;
+    text-align: center;
+    width: 150px;
+}
+
+#content_service_deploy_panel_name_title,
+#content_service_deploy_panel_mode_title,
+#content_service_deploy_panel_host_title,
+#content_service_deploy_panel_user_title,
+#content_service_deploy_panel_operation_title {
+    margin-top: 20px;
+}
+
+#content_service_deploy_panel_name_content,
+#content_service_deploy_panel_mode_content,
+#content_service_deploy_panel_host_content,
+#content_service_deploy_panel_user_content,
+#content_service_deploy_panel_operation_content {
+    margin-top: 10px;
+}
+
+/*组件或者服务列表*/
+#content_component_list, #content_service_list {
+    margin-top: 50px;
+    width: 1030px;
+    float: left;
+}
+
+#content_component_title, #content_service_title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#content_component_list_table, #content_service_list_table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 830px;
+}
+
+#content_component_list_table th, td, #content_service_list_table th, td {
+    border: 1px solid black;
+    font-size: 13px;
+    font-family: "Microsoft YaHei";
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    height: 30px;
+}
+
+#content_component_list_table th, #content_service_list_table th {
+    background-color: gainsboro;
+}
+
+/*一键部署*/
+#content_deploy {
+    text-align: center;
+    float: left;
+    width: 1030px;
+    margin-top: 60px;
+}

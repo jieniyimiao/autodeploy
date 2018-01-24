@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎使用自动部署平台网站 - Welcome to auto deploy website</title>
+    <meta name="keywords" content="自动部署,自动部署平台">
+    <meta name="description" content="该平台可实现组件和服务的一键部署和升级">
+
+
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery/smoothness/jquery-ui-1.10.3.custom.css">
+    <script type="text/javascript" src="/static/js/jquery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/static/js/jquery/jquery-ui-1.10.3.custom.js"></script>
+
+    <link rel="stylesheet" href="/static/css/template.css" type="text/css" />
+    <script type="text/javascript" src="/static/js/template.js"></script>
+
+    <style>
+        #content {
+            font-family: "Microsoft YaHei";
+            width: 1030px;
+            float: left;
+        }
+
+        #content_progress {
+            margin-top: 40px;
+            float: left;
+        }
+
+        #content_progress_title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        {% comment %}juery ui进度条{% endcomment %}
+        .ui-progressbar {
+            margin-left: 100px;
+            margin-right: 70px;
+            float: left;
+            width: 700px;
+            height: 20px;
+            position: relative;
+        }
+
+        .progress-label {
+            font-size: 15px;
+            line-height: 15px;
+            position: absolute;
+            left: 50%;
+            top: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #fff;
+        }
+
+        #content_progress_abort_btn{
+            text-align: center;
+            float: left;
+            width: 58px;
+        }
+        #content_progress_abort_btn button{
+            font-family: "Microsoft YaHei";
+            height: 22px;
+            font-weight: bold;
+        }
+
+        #content_log{
+            width: 1030px;
+            float: left;
+        }
+
+        #content_log_title {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        #content_log_content{
+            text-align: center;
+        }
+
+    </style>
+
+    <script>
+        $(function () {
+            {% comment %}进度条{% endcomment %}
+            var progressbar = $("#progressbar"),
+                progressLabel = $(".progress-label");
+
+            progressbar.progressbar({
+                value: false,
+                change: function () {
+                    progressLabel.text(progressbar.progressbar("value") + "%");
+                },
+                complete: function () {
+                    progressLabel.text("部署完成！");
+                }
+            });
+
+            function progress() {
+                var val = progressbar.progressbar("value") || 0;
+
+                progressbar.progressbar("value", val + 1);
+
+                if (val < 99) {
+                    setTimeout(progress, 100);
+                }
+            }
+
+            setTimeout(progress, 1000);
+        });
+
+    </script>
+
+</head>
+<body>
+
+<!--=============header===============-->
+<div id="header">
+    <div id="header_logo">
+        <a href="../index">
+            <img src="/static/imgs/logo_white.png">
+        </a>
+    </div>
+    <div id="header_content">
+        <a href="../index" style="text-decoration: none; color:black">
+            <p1>自动化部署平台</p1>
+        </a>
+    </div>
+</div>
+<!--=============aside===============-->
+<div id="aside">
+    <ul id="aside_menu">
+        <li><a href="/get_global_config_page/">全局配置</a></li>
+        <li>-</li>
+        <li><a href="/get_host_list_page/">主机列表</a></li>
+        <li>-</li>
+        <li><a href="/get_deploy_config_page/">部署配置</a></li>
+        <li>-</li>
+        <li><a href="/get_deploying_page/"><strong>正在部署</strong></a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">部署结果</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">服务管理</a></li>
+    </ul>
+</div>
+<!--=============content===============-->
+<div id="content">
+    <div id="content_progress">
+        <div id="content_progress_title">部署进度</div>
+        <div id="progressbar">
+            <div class="progress-label">准备部署...</div>
+        </div>
+        <div id="content_progress_abort_btn">
+            <button>终止</button>
+        </div>
+    </div>
+    <div id="content_log">
+        <div id="content_log_title">部署日志</div>
+        <div id="content_log_content">
+            <textarea rows="35" cols="120" style="overflow-y: scroll; overflow-x: hidden">
+
+            </textarea>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
+
+
+

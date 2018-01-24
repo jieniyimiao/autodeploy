@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎使用自动部署平台网站 - Welcome to auto deploy website</title>
+    <meta name="keywords" content="自动部署,自动部署平台">
+    <meta name="description" content="该平台可实现组件和服务的一键部署和升级">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery/smoothness/jquery-ui-1.10.3.custom.css">
+    <script type="text/javascript" src="/static/js/jquery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/static/js/jquery/jquery-ui-1.10.3.custom.js"></script>
+
+    <link rel="stylesheet" href="/static/css/template.css" type="text/css" />
+    <script type="text/javascript" src="/static/js/template.js"></script>
+
+    <link rel="stylesheet" href="/static/css/config_ip_dialog.css" type="text/css" />
+    <script type="text/javascript" src="/static/js/config_ip_dialog.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/deploy_config_page.css">
+    <script type="text/javascript" src="/static/js/deploy_config_page.js"></script>
+
+</head>
+<body>
+
+<!--=============header===============-->
+<div id="header">
+    <div id="header_logo">
+        <a href="../index">
+            <img src="/static/imgs/logo_white.png">
+        </a>
+    </div>
+    <div id="header_content">
+        <a href="../index" style="text-decoration: none; color:black">
+            <p1>自动化部署平台</p1>
+        </a>
+    </div>
+</div>
+<!--=============aside===============-->
+<div id="aside">
+    <ul id="aside_menu">
+        <li><a href="/get_global_config_page/">全局配置</a></li>
+        <li>-</li>
+        <li><a href="/get_host_list_page/">主机列表</a></li>
+        <li>-</li>
+        <li><a href="/get_deploy_config_page/"><strong>部署配置</strong></a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">正在部署</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">部署结果</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">服务管理</a></li>
+    </ul>
+</div>
+<!--=============content===============-->
+<div id="content">
+    <!--=============组件配置面板===============-->
+    <div id="content_component_deploy">
+        <div id="content_component_deploy_text">
+            <div id="content_component_deploy_text_content">组件部署</div>
+        </div>
+
+        <div id="content_component_deploy_panel">
+            <div id="content_component_deploy_panel_name">
+                <div id="content_component_deploy_panel_name_title"><label>组件</label></div>
+                <div id="content_component_deploy_panel_name_content">
+                    <select name="component_name" id="component_name">
+                        <option value="" selected="selected" disabled="disabled">请选择</option>
+                        <option value="mongodb">mongodb</option>
+                        <option value="redis">redis</option>
+                        <option value="mysql">mysql</option>
+                        <option value="zookeeper">zookeeper</option>
+                        <option value="jdk">jdk</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="content_component_deploy_panel_mode">
+                <div id="content_component_deploy_panel_mode_title">
+                    <label>模式</label>
+                </div>
+                <div id="content_component_deploy_panel_mode_content">
+                    <select name="mode_name" id="mode_name">
+                        <option disabled="disabled" selected="selected" value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="content_component_deploy_panel_operation">
+                <div id="content_component_deploy_panel_operation_title">
+                    <label>操作</label>
+                </div>
+                <div id="content_component_deploy_panel_operation_content">
+                    <button type="button" id="component_operation_btn">添加</button>
+                </div>
+            </div>
+        </div>
+
+        <!--=============ip通用配置对话框===============-->
+        <div id="common_ip_config_dialog">
+            <br/>
+            <div>
+                <div id="d1" class="wrapper-dropdown-4">host
+                    <ul class="dropdown">
+                        {% for line in host_list %}
+                            {% if line.status == "ok" %}
+                                <li>
+                                    <input type="checkbox" class="dialog-1" value={{ line.ip }}>
+                                    <label>{{ line.host_name }}-{{ line.ip }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--=============mysql cluster配置对话框===============-->
+        <div id="mysql_cluster_ip_config_dialog">
+            <br/>
+            <div id="mysql_cluster_ip_config_dialog_vip">
+                vip: &nbsp; <input name="vip" type="text" size="12" id="mysql_cluster_ip_config_dialog_vip_val">
+            </div>
+            <br/>
+            <div>
+                <div id="d2" class="wrapper-dropdown-4">double host
+                    <ul class="dropdown">
+                        {% for line in host_list %}
+                            {% if line.status == "ok" %}
+                                <li>
+                                    <input type="checkbox" class="dialog-2" value={{ line.ip }}>
+                                    <label>{{ line.host_name }}-{{ line.ip }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--=============mongodb cluster配置对话框===============-->
+        <div id="mongodb_cluster_ip_config_dialog">
+            <br/>
+            <div>
+                <div id="d3" class="wrapper-dropdown-4">replication host
+                    <ul class="dropdown">
+                        {% for line in host_list %}
+                            {% if line.status == "ok" %}
+                                <li>
+                                    <input type="checkbox" class="dialog-3" value={{ line.ip }}>
+                                    <label>{{ line.host_name }}-{{ line.ip }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <br/>
+                <div id="d4" class="wrapper-dropdown-4">config host
+                    <ul class="dropdown">
+                        {% for line in host_list %}
+                            {% if line.status == "ok" %}
+                                <li>
+                                    <input type="checkbox" class="dialog-4" value={{ line.ip }}>
+                                    <label>{{ line.host_name }}-{{ line.ip }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <br/>
+                <div id="d5" class="wrapper-dropdown-4">mongos host
+                    <ul class="dropdown">
+                        {% for line in host_list %}
+                            {% if line.status == "ok" %}
+                                <li>
+                                    <input type="checkbox" class="dialog-5" value={{ line.ip }}>
+                                    <label>{{ line.host_name }}-{{ line.ip }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--=============redis sentinel配置对话框===============-->
+        <div id="redis_sentinel_ip_config_dialog">
+            <br/>
+            <div>
+                <div id="d6" class="wrapper-dropdown-4">redis host
+                    <ul class="dropdown">
+                        {% for line in host_list %}
+                            {% if line.status == "ok" %}
+                                <li>
+                                    <input type="checkbox" class="dialog-6" value={{ line.ip }}>
+                                    <label>{{ line.host_name }}-{{ line.ip }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <br/>
+                <div id="d7" class="wrapper-dropdown-4">sentinel host
+                    <ul class="dropdown">
+                        {% for line in host_list %}
+                            {% if line.status == "ok" %}
+                                <li>
+                                    <input type="checkbox" class="dialog-7" value={{ line.ip }}>
+                                    <label>{{ line.host_name }}-{{ line.ip }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--=============服务配置面板===============-->
+    <div id="content_service_deploy">
+        <div id="content_service_deploy_text">
+            <div id="content_service_deploy_text_content">服务部署</div>
+        </div>
+
+        <div id="content_service_deploy_panel">
+
+            <div id="content_service_deploy_panel_name">
+                <div id="content_service_deploy_panel_name_title"><label>服务</label></div>
+                <div id="content_service_deploy_panel_name_content">
+                    <select name="service_name" id="service_name">
+                        <option value="" selected="selected" disabled="disabled">请选择</option>
+                        <option value="pms">pms</option>
+                        <option value="security">ss</option>
+                        <option value="ums">ums</option>
+                        <option value="psc">pcs</option>
+                        <option value="gs">gs</option>
+                        <option value="fs">fs</option>
+                        <option value="cds">cds</option>
+                        <option value="as">as</option>
+                        <option value="mes">mes</option>
+                        <option value="ps">ps</option>
+                        <option value="rtc">rtc</option>
+                        <option value="test">test</option>
+                        <option value="rocket_mq">rocket_mq</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="content_service_deploy_panel_mode">
+                <div id="content_service_deploy_panel_mode_title">
+                    <label>模式</label>
+                </div>
+                <div id="content_service_deploy_panel_mode_content">
+                    <select name="service_mode_name" id="service_mode_name">
+                        <option disabled="disabled" selected="selected" value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="content_service_deploy_panel_host">
+                <div id="content_service_deploy_panel_host_title"><label>host</label></div>
+                <div id="content_service_deploy_panel_host_content">
+                    <button type="button" id="content_service_deploy_panel_host_content_btn">选择ip</button>
+                </div>
+            </div>
+
+            <div id="content_service_deploy_panel_user">
+                <div id="content_service_deploy_panel_user_title">
+                    <label>自定义用户</label>
+                </div>
+                <div id="content_service_deploy_panel_user_content">
+                    <input type="checkbox" id="content_service_deploy_panel_user_content_checkbox">
+                </div>
+            </div>
+
+            <div id="content_service_deploy_panel_operation">
+                <div id="content_service_deploy_panel_operation_title">
+                    <label>操作</label>
+                </div>
+                <div id="content_service_deploy_panel_operation_content">
+                    <button type="button" id="service_operation_btn">添加</button>
+                </div>
+            </div>
+        </div>
+
+        <!--=============service user配置对话框===============-->
+        <div id="service_user_config_dialog">
+            <br/>
+            <div id="service_user_config_dialog_user">
+                用户名: &nbsp; <input name="user" type="text" size="12" id="service_user_config_dialog_user_val">
+            </div>
+            <br/>
+        </div>
+
+    </div>
+
+    <!--=============组件列表===============-->
+    <div id="content_component_list">
+        <div id="content_component_title">组件列表</div>
+        <table id="content_component_list_table">
+            <tr>
+                <th style="width: 5px; display: none"></th>
+                <th style="width: 250px;">组件名</th>
+                <th style="width: 250px;">模式</th>
+                <th style="width: 250px;">详情</th>
+                <th style="width: 250px;">操作</th>
+            </tr>
+            {% for line in deploy_config %}
+                {% if line.type == 'component' %}
+                    <tr>
+                        <td style="display: none"><span>{{ line.id }}</span></td>
+                        <td>{{ line.component_name }}</td>
+                        <td>{{ line.mode_name }}</td>
+                        <td>
+                            {{ line.conf }}
+                            {% if not line.user_name == 'default' %}
+                                user={{ line.user_name }}
+                            {% endif %}
+
+                        </td>
+                        <td>
+                            <button class="content_service_list_del_btn" type="button" id={{ line.id }}>删除</button>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+
+    <!--=============服务列表===============-->
+    <div id="content_service_list">
+        <div id="content_service_title">服务列表</div>
+        <table id="content_service_list_table">
+            <tr>
+                <th style="width: 5px; display: none"></th>
+                <th style="width: 250px;">服务名</th>
+                <th style="width: 250px;">模式</th>
+                <th style="width: 250px;">详情</th>
+                <th style="width: 250px;">操作</th>
+            </tr>
+            {% for line in deploy_config %}
+                {% if line.type == 'service' %}
+                    <tr>
+                        <td style="display: none"><span>{{ line.id }}</span></td>
+                        <td>{{ line.component_name }}</td>
+                        <td>{{ line.mode_name }}</td>
+                        <td>
+                            {{ line.conf }}
+                            {% if not line.user_name == 'default' %}
+                                user={{ line.user_name }}
+                            {% endif %}
+
+                        </td>
+                        <td>
+                            <button class="content_service_list_del_btn" type="button" id={{ line.id }} >删除</button>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    <!--=============一键部署===============-->
+    <div id="content_deploy">
+        <button>一键部署</button>
+
+        <!--=============一键部署确定对话框===============-->
+        <div id="content_deploy_dialog">
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+#content {
+    width: 1030px;
+    float: left;
+}
+
+#content_title {
+    text-align: center;
+    margin-top: 62px;
+    text-align: center;
+    font-family: "Microsoft YaHei";
+    font-size: 20px;
+}
+
+#content_table {
+    margin-top: 40px;
+}
+
+#content_table_table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 750px;
+}
+
+#content_table th, td {
+    border: 1px solid black;
+    font-size: 13px;
+    font-family: "Microsoft YaHei";
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    height: 30px;
+}
+
+#content_table th {
+    background-color: gainsboro;
+}
+
+#content_form_action {
+    margin-top: 15px;
+    text-align: center;
+    font-family: "Microsoft YaHei";
+    font-size: 15px;
+}
+
+#content_btn {
+    text-align: center;
+    margin-top: 65px;
+    margin-left: 650px;
+}

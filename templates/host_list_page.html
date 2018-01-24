@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎使用自动部署平台网站 - Welcome to auto deploy website</title>
+    <meta name="keywords" content="自动部署,自动部署平台">
+    <meta name="description" content="该平台可实现组件和服务的一键部署和升级">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery/smoothness/jquery-ui-1.10.3.custom.css">
+    <script type="text/javascript" src="/static/js/jquery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/static/js/jquery/jquery-ui-1.10.3.custom.js"></script>
+
+
+    <link rel="stylesheet" href="/static/css/template.css" type="text/css"/>
+    <script type="text/javascript" src="/static/js/template.js"></script>
+
+    <link rel="stylesheet" href="/static/css/host_list_page.css" type="text/css">
+    <script type="text/javascript" src="/static/js/host_list_page.js"></script>
+
+</head>
+<body>
+
+<!--=============header===============-->
+<div id="header">
+    <div id="header_logo">
+        <a href="../index">
+            <img src="/static/imgs/logo_white.png">
+        </a>
+    </div>
+    <div id="header_content">
+        <a href="../index" style="text-decoration: none; color:black">
+            <p1>自动化部署平台</p1>
+        </a>
+    </div>
+</div>
+<!--=============aside===============-->
+<div id="aside">
+    <ul id="aside_menu">
+        <li><a href="/get_global_config_page/">全局配置</a></li>
+        <li>-</li>
+        <li><a href="/get_host_list_page/">主机列表</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">部署配置</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">正在部署</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">部署结果</a></li>
+        <li>-</li>
+        <li class="ui-state-disabled"><a href="#">服务管理</a></li>
+    </ul>
+</div>
+<!--=============content===============-->
+<div id="content">
+    <div id="content_title">主机列表</div>
+
+    <div id="content_table">
+        <table id="content_table_table">
+            <tr>
+                <th style="width: 5px;"></th>
+                <th style="width: 250px;">hostName</th>
+                <th style="width: 250px;">ip</th>
+                <th style="width: 250px;">status</th>
+            </tr>
+            {% for line in data %}
+                <tr>
+                    <td> <input type="checkbox" id={{ line.id }}></td>
+                    <td>{{ line.host_name }}</td>
+                    <td>{{ line.ip }}</td>
+                    <td>{{ line.status }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div id="content_form_action">
+        <button type="button" id="content_form_action_add">增加</button>
+        <button type="button" id="content_form_action_del">删除</button>
+    </div>
+    <div id="content_form_add_dialog">
+        <div id="content_form_add_dialog_hostname">
+            hostname: &nbsp; <input name="hostname" type="text" size="15" id="content_form_add_dialog_hostname_val">
+        </div>
+        <br/>
+        <div id="content_form_add_dialog_ip">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input name="ip" type="text" size="15" id="content_form_add_dialog_ip_val">
+        </div>
+    </div>
+    <div id="content_btn">
+        <a href="/get_deploy_config_page/"> <input name="" type="submit" value="下一步"/> </a>
+    </div>
+
+</div>
+
+
+</body>
+</html>
+
+
+

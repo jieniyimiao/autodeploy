@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery/smoothness/jquery-ui-1.10.3.custom.css">
+    <script type="text/javascript" src="/static/js/jquery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/static/js/jquery/jquery-ui-1.10.3.custom.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("p").click(function () {
+                $(this).hide();
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $("#div1").html("hello jquery...");
+        });
+    </script>
+
+
+
+    <script>
+        $(function () {
+            $(".btn").button();
+        });
+    </script>
+
+
+</head>
+<body>
+
+<h1 style="background-color: beige; color: red">hello world!</h1>
+<p>If you click on me, I will disappear.</p>
+
+<h1 style="color: blue">用户登录</h1>
+<form method="post" action="/test/">
+    <input name="username" type="text" placeholder="username"><br>
+    <input name="password" type="password" placeholder="password"><br>
+    {{ error }}<br>
+    <button id="btn" type="submit">登录</button>
+</form>
+
+<h1 style="color: blue">用户信息</h1>
+<table border="1">
+    <thead>
+    <th>username</th>
+    <th>password</th>
+    </thead>
+    <tbody>
+    {% for line in data %}
+        <tr>
+            <td>{{ line.user }}</td>
+            <td>{{ line.pwd }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+<div id="div1">
+</div>
+
+<input type="button" value="123" class="btn"/>
+
+
+</body>
+</html>

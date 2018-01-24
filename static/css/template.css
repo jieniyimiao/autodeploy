@@ -1,0 +1,50 @@
+/*---------------global--------------------*/
+body {
+    margin: 0 auto;
+    width: 1200px;
+    /*background-color: darkgray;*/
+}
+
+/*---------------header--------------------*/
+#header {
+    height: 100px;
+    background-color: lightgrey;
+}
+
+#header_logo {
+    width: 260px;
+    float: left;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#header_content {
+    width: 940px;
+    float: left;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#header_content p1 {
+    font-family: "Microsoft YaHei";
+    font-size: 40px;
+    margin-right: 180px;
+}
+
+/*---------------aside--------------------*/
+#aside {
+    width: 170px;
+    height: 1000px;
+    float: left;
+    background-color: lightgrey;
+}
+
+.ui-menu {
+    width: 164px;
+}
+
+.ui-corner-all {
+    text-align: center;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+}
